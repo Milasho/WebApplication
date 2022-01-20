@@ -1,4 +1,5 @@
 from flask import Flask,request
+import random
 app = Flask(__name__)
 
 @app.route("/losowa_liczba")
@@ -7,14 +8,12 @@ def parameter():
  if(type==None or type==''):  # Parameter is not specified
      return f'Podanie typu jest wymagane.'
  if(type!='parzyste' and type!='nieparzyste'):  # The specified parameter is incorrect
-     return f'Podany typ jest niepoprawny.'
+     return f'Parametr "typ" musi mieć wartość "parzyste" lub "nieparzyste".'
  else:
-       if type is 'parzyste':
-           return type # Code goes here
+       if type == 'parzyste':
+           return str(random.randrange(0,101,2))  # Generates a pseudo-random even number
        else:
-           return type # Code goes here
-    
-
+           return str(random.randrange(1,100,2))  # Generates a pseudo-random odd number
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
